@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+        crossorigin="anonymous"></script>
+    <!-- Bootstrap -->
+
+    <!-- Font awesome -->
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <!-- Font awesome -->
+
+
+    <title>Whiteboard</title>
+
+    <style>
+        .black {
+            background-color: #282c33;
+            cursor: url(marker.png), auto;
+        }
+
+        .colorPicker {
+
+            cursor: pointer;
+        }
+
+        .way_icon {
+            font-size: 30px;
+            background: linear-gradient(to bottom, #d04141, #507ac8, #b0ff70);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .eraseAllBtn:hover {
+            box-shadow: none;
+        }
+    </style>
+</head>
+
+<body class="black">
+    <div class="container-fluid">
+        <span class="text-white display-6 my-4 mx-auto d-block border-warning"
+            style="border-bottom: 2px solid ; width: fit-content;padding-top: 0px; ">
+            The Whiteboard</span>
+
+        <div class="row">
+
+            <div class="col-md-1 mb-3 mt-4 border border-warning"
+                style="height: fit-content;box-shadow:inset  1px 1px 8px 1px #000000;">
+
+                <div class="my-4">
+                    <i id="greenColor"
+                        style="cursor: pointer; color: green; font-size: 30px; border-radius: 50%;box-shadow: 1px 1px 8px 0px #000000"
+                        title="Green" class="fas fa-circle"></i>
+                    <i id="blackColor"
+                        style="cursor: pointer; color: black; font-size: 30px;border-radius: 50%;box-shadow: 1px 1px 8px 0px #000000"
+                        title="Black" class="fas fa-circle"></i>
+                    <i id="blueColor"
+                        style="cursor: pointer; color: blue; font-size: 30px;border-radius: 50%;box-shadow: 1px 1px 8px 0px #000000"
+                        title="Blue" class="fas fa-circle"></i>
+                    <i id="redColor"
+                        style="cursor: pointer; color: red; font-size: 30px;border-radius: 50%;box-shadow: 1px 1px 8px 0px #000000"
+                        title="Red" class="fas fa-circle"></i>
+                    <i id="brownColor"
+                        style="cursor: pointer; color: brown; font-size: 30px;border-radius: 50%;box-shadow: 1px 1px 8px 0px #000000"
+                        title="Brown" class="fas fa-circle"></i>
+                    <i id="yellowColor"
+                        style="cursor: pointer; color: yellow; font-size: 30px;border-radius: 50%;box-shadow: 1px 1px 8px 0px #000000"
+                        title="Yellow" class="fas fa-circle"></i>
+                    <i id="orangeColor"
+                        style="cursor: pointer; color: #FF4800; font-size: 30px;border-radius: 50%;box-shadow: 1px 1px 8px 0px #000000"
+                        title="Orange" class="fas fa-circle"></i>
+
+                    <input type="color" name='penColor' class="d-none" id="penColor">
+                    <a href="javascript:void(0);" class="colorPicker" title="Custom Colour">
+                        <i class="fas fa-circle way_icon"
+                            style="box-shadow: 1px 1px 8px 0px #000000;border-radius: 50%;"></i>
+                    </a>
+                    <br>
+
+                    <label for="strokeLenght" class="text-white btn-sm">Stroke Width</label> <br>
+                    <input class="form-range text-white" style="width: 70%;" type="range" value="1" min="1" max="50"
+                        id="strokeLength" oninput="this.nextElementSibling.value = this.value">
+                    <output class="text-white">1</output><br>
+
+                    <button class="btn btn-warning btn-sm text-dark dusterBtn  my-1" title="Duster"
+                        style="box-shadow: 1px 1px 8px 0px #000000;"><span class="pointer">
+                            <i class="fas fa-eraser"></i> </span>
+                    </button>
+
+                    <button class="btn btn-warning btn-sm text-dark eraseAllBtn my-1"
+                        style="box-shadow: 1px 1px 8px 0px #000000;" onclick="clearCanvas()" title="Clear all"><i
+                            class="fas fa-ban "></i>
+                    </button>
+
+                    <button class="btn btn-warning btn-sm text-dark undoBoard my-1 "
+                        style="box-shadow: 1px 1px 8px 0px #000000;" title="Undo"><i class="fas fa-undo"></i>
+                    </button>
+
+                    <button class="btn btn-warning btn-sm text-dark redoBoard my-1"
+                        style="box-shadow: 1px 1px 8px 0px #000000;" title="Redo"><i class="fas fa-redo"></i>
+                    </button>
+
+                    <a id="download" download="Whiteboard Drawing" class="btn btn-warning btn-sm "
+                        style="width: 67px;box-shadow: 1px 1px 8px 0px #000000;" title="Download"
+                        onclick='downloadImg(this)'><i class="fas fa-download"></i>
+                    </a>
+                </div>
+
+            </div>
+
+            <div class="col-md mt-0">
+                <canvas class="  rounded-3 myCanvas" style='box-shadow: 1px 1px 8px 0px #000000' width="1100px"
+                    height="500px">
+                    Your Browser does not suppoert Canvas.
+                </canvas>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+<script src="./whiteboard.js"></script>
+
+<script>
+    document.querySelector(".colorPicker").addEventListener('click', e => {
+        document.querySelector("#penColor").click()
+
+    })
+
+    document.querySelector("#penColor").addEventListener('change', e => {
+        document.querySelector(".selectedColor").style.backgroundColor = document.querySelector('#penColor').value
+    })
+
+    document.querySelector(".selectedColor").style.backgroundColor = document.querySelector('#penColor').value;
+    console.log(document.querySelector(".selectedColor"));
+
+    function downloadImg(img) {
+        var image = canvas.toDataURL("image/png", 0.5);
+        img.href = image;
+    };
+</script>
+
+</html>
